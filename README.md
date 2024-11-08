@@ -45,3 +45,9 @@ python -m src.main
   - **`main.py`**: The entry point of the application where the agent is initialized and started.
 <!-- - **`tests/`**: Directory for unit tests, including tests for agent behaviors and interactions.
   - **`test_autonomous_agent.py`**: Contains test cases that verify the functionality and behavior of the autonomous agent. -->
+  
+## Acknowledgments
+
+- **Tenderly**: For offering a platform to easily test and debug Ethereum smart contracts in a controlled environment.
+- **web3.py**: For providing an intuitive Python library to interact with Ethereum and simplify blockchain operations.
+- Please refer to the **`example.env`** file for the required environment variables to configure the project correctly.
