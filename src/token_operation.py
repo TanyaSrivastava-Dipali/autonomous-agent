@@ -1,4 +1,5 @@
 import asyncio
+from web3 import Web3
 from .logger import logger
 from .config.settings import MESSAGE_WORDS, ETH_SETTINGS
 
@@ -10,38 +11,38 @@ async def get_erc20_balance_behaviour(agent):
         balance_in_tokens = balance / (10**dec)
         logger.info(f"{agent.name}::ERC-20 Token Balance for address {add}: {balance_in_tokens}")
         await asyncio.sleep(10)  # Add a 10-second delay before checking balance again
-    
-async def transfer_erc20_token(agent):
-    try:
-        w3 = Web3(Web3.HTTPProvider(ETH_SETTINGS["RPC_NODE_URL"]))
-        balance = agent.token_contract.functions.balanceOf(
-        agent.w3.to_checksum_address(ETH_SETTINGS["FROM_ADDRESS"])
-        ).call()
-        one_unit = 1 * 10 ** (agent.token_contract.functions.decimals().call())
-        if balance >= one_unit:
-            nonce = agent.w3.eth.getTransactionCount(ETH_SETTINGS["FROM_ADDRESS"])
 
-            txn = contract.functions.transfer(
-                ETH_SETTINGS["TO_ADDRESS"], w3.toWei(1, "ether")
-            ).buildTransaction(
+def transfer_erc20_token(self):
+    try:
+        if not self.w3.is_connected():
+            logger.error("Web3 is not connected.")
+            return None
+        balance = self.token_contract.functions.balanceOf(
+        self.w3.to_checksum_address(ETH_SETTINGS["FROM_ADDRESS"])
+        ).call()
+        token_to_transfer = 1 * 10 ** (self.token_contract.functions.decimals().call())
+        if balance >= token_to_transfer:
+            nonce = self.w3.eth.get_transaction_count(ETH_SETTINGS["FROM_ADDRESS"])
+
+            txn = self.token_contract.functions.transfer(
+                ETH_SETTINGS["TO_ADDRESS"], token_to_transfer
+            ).build_transaction(
                 {
-                    "chainId": agent.w3.eth.chain_id,
+                    "chainId": self.w3.eth.chain_id,
                     "gas": 2000000,
-                    "gasPrice": w3.toWei("50", "gwei"),
+                    "gasPrice": self.w3.eth.gas_price,
                     "nonce": nonce,
                 }
             )
 
-            signed_txn = agent.w3.eth.account.sign_transaction(
+            signed_txn = self.w3.eth.account.sign_transaction(
                 txn, private_key=ETH_SETTINGS["PRIVATE_KEY"]
             )
-            tx_hash = agent.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-            logger.info(f"Transaction sent with hash: {tx_hash.hex()}")
+            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
+            logger.info(f"{self.name}::Transaction sent with hash: {tx_hash.hex()}")
             return tx_hash.hex()
         else:
             logger.info("Insufficient tokens to transfer.")
     except Exception as e:
         logger.error(f"Error transferring token: {e}")
         return None
-
-    
