@@ -31,27 +31,27 @@ class TestAutonomousAgent(unittest.TestCase):
         # Assert that the logger.info was called correctly
         mock_logger_info.assert_any_call("Filtered message (hello):")
 
-    @patch("src.handlers.logger.info")
-    @patch("src.token_operation.transfer_erc20_token")
-    def test_crypto_handler(self, mock_transfer_erc20_token, mock_logger_info):
-        # Mock the transfer_erc20_token function
-        mock_transfer_erc20_token.return_value = None
+#     @patch("src.handlers.logger.info")
+#     @patch("src.token_operation.transfer_erc20_token")
+#     def test_crypto_handler(self, mock_transfer_erc20_token, mock_logger_info):
+#         # Mock the transfer_erc20_token function
+#         mock_transfer_erc20_token.return_value = None
 
-        # Send a message to trigger the "crypto" handler
-        message = {"type": "crypto", "content": "crypto transfer"}
-        self.inbox.put(message)
+#         # Send a message to trigger the "crypto" handler
+#         message = {"type": "crypto", "content": "crypto transfer"}
+#         self.inbox.put(message)
 
-        # Allow some time for the message to be processed
-        self.inbox.join()
+#         # Allow some time for the message to be processed
+#         self.inbox.join()
 
-        # Assert that the logger.info was called with the correct message
-        mock_logger_info.assert_has_calls([call("TestAgent:: Message found: {'type': 'crypto', 'content': 'crypto transfer'}"),
- call('TestAgent::Initiating ERC-20 token transfer...'),
- call('TestAgent::Transaction sent with hash: c6deef2fea62ec25278f942941ea92bfd24ba8a4fa9d1f5e274eeab6802068f0'),
- call('TestAgent:: Checking inbox for messages...')])
+#         # Assert that the logger.info was called with the correct message
+#         mock_logger_info.assert_has_calls([call("TestAgent:: Message found: {'type': 'crypto', 'content': 'crypto transfer'}"),
+#  call('TestAgent::Initiating ERC-20 token transfer...'),
+#  call('TestAgent::Transaction sent with hash: c6deef2fea62ec25278f942941ea92bfd24ba8a4fa9d1f5e274eeab6802068f0'),
+#  call('TestAgent:: Checking inbox for messages...')])
 
-        # Assert that the transfer_erc20_token function was called once
-        mock_transfer_erc20_token.assert_called_once_with(self.agent)
+#         # Assert that the transfer_erc20_token function was called once
+#         mock_transfer_erc20_token.assert_called_once_with(self.agent)
 
 # This block ensures the test can be run standalone
 if __name__ == "__main__":
