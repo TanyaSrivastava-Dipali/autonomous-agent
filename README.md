@@ -18,13 +18,19 @@ Follow these steps to install the necessary dependencies for the project:
 git clone https://github.com/your-username/autonomous-agent.git
 cd autonomous-agent
 ```
+2. Create Virtual Environment:
 
-2. Install the required packages:
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+3. Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
-2. Run the agent:
+4. Run the agent:
 
 ```bash
 python -m src.main
