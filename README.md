@@ -35,6 +35,11 @@ pip install -r requirements.txt
 ```bash
 python -m src.main
 ```
+5. Run the Test:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests
+```
 
 ## Description of Key Folders and Files:
 
