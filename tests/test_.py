@@ -25,6 +25,7 @@ class TestAutonomousAgent(unittest.TestCase):
 
     @patch("src.handlers.logger.info")
     def test_hello_handler(self, mock_logger_info):
+        print("Executing test_hello_handler...")
         # Send a message to trigger the "hello" handler
         message = {"type": "hello", "content": "hello world"}
         self.inbox.put(message)
@@ -38,6 +39,7 @@ class TestAutonomousAgent(unittest.TestCase):
     @patch("src.handlers.logger.info")  # Mock the logger
     @patch("src.token_operation.transfer_erc20_token")  # Mock the transfer function
     def test_crypto_handler(self, mock_transfer_erc20_token, mock_logger_info):
+        print("Executing test_crypto_handler...")
         # Set up mock return value for the transfer function
         mock_transaction_hash = "0x9af63e625bd695c922cba4fdf1cd3475974ed0b636d4d518096701b9f90f012a"
         mock_transfer_erc20_token.return_value = mock_transaction_hash
@@ -72,6 +74,7 @@ class TestERC20BalanceBehaviour(IsolatedAsyncioTestCase):
     @patch("src.autonomous_agent.Web3")  # Mock Web3
     @patch("src.token_operation.logger.info")  # Mock logger
     async def test_get_erc20_balance_behaviour(self, mock_logger_info, mock_web3):
+        print("Executing test_erc_20_balance_behaviour...")
         # Mock ETH_SETTINGS using patch.dict
         with patch.dict(
             "src.config.settings.ETH_SETTINGS",
