@@ -1,6 +1,4 @@
-import time
 import queue
-from threading import Thread
 from .logger import logger
 
 

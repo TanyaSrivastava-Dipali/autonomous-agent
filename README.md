@@ -15,7 +15,7 @@ Follow these steps to install the necessary dependencies for the project:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/autonomous-agent.git
+git clone https://github.com/TanyaSrivastava-Dipali/autonomous-agent.git
 cd autonomous-agent
 ```
 2. Create Virtual Environment:
@@ -30,12 +30,24 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-4. Run the agent:
+
+4. Copy the keys in .env file from .env.example file provided in the repository:
+```bash
+cp .env.example .env
+```
+
+5. Add Your Keys to the .env File:
+
+
+  - Open the .env file and replace placeholder values with your actual keys, including RPC_NODE_URL, TOKEN_ADDRESS, FROM_ADDRESS, TO_ADDRESS, and PRIVATE_KEY.
+
+
+6. Run the agent:
 
 ```bash
 python -m src.main
 ```
-5. Run the Test:
+7. Run the Test:
 
 ```bash
 PYTHONPATH=src python -m unittest discover -s tests
@@ -60,4 +72,3 @@ PYTHONPATH=src python -m unittest discover -s tests
 
 - **Tenderly**: For offering a platform to easily test and debug Ethereum smart contracts in a controlled environment.
 - **web3.py**: For providing an intuitive Python library to interact with Ethereum and simplify blockchain operations.
-- Please refer to the **`example.env`** file for the required environment variables to configure the project correctly.

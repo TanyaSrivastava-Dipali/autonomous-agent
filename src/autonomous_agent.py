@@ -9,8 +9,6 @@ from .token_operation import get_erc20_balance_behaviour
 from .handlers import hello_filter_handler,crypto_filter_handler
 from .agent import Agent
 
-
-
 class AutonomousAgent(Agent):
 
     def __init__(self,agent_name):
@@ -23,14 +21,14 @@ class AutonomousAgent(Agent):
             address=Web3.to_checksum_address(ETH_SETTINGS["TOKEN_ADDRESS"]),
             abi=ERC20_ABI,
         )
-        self.register_handler("hello", hello_filter_handler)
+        self.register_handler("hello",lambda message: hello_filter_handler(self,message))
         self.register_handler("crypto",lambda message: crypto_filter_handler(self, message))
 
         
     async def random_word_gen_behaviour(self):
         while True:
             words = random.sample(MESSAGE_WORDS, 2)
-            logger.info(f"Words selected: {words}")
+            logger.info(f"{self.name}:: Words selected: {words}")
             message = " ".join(words)
             type = "message"
             for i in range(len(WORDS_TO_FIND)):

@@ -1,7 +1,6 @@
 import asyncio
-from web3 import Web3
 from .logger import logger
-from .config.settings import MESSAGE_WORDS, ETH_SETTINGS
+from .config.settings import  ETH_SETTINGS
 
 async def get_erc20_balance_behaviour(agent):
     while True:
@@ -9,7 +8,7 @@ async def get_erc20_balance_behaviour(agent):
         balance = agent.token_contract.functions.balanceOf(ETH_SETTINGS["FROM_ADDRESS"]).call()
         dec = agent.token_contract.functions.decimals().call()
         balance_in_tokens = balance / (10**dec)
-        logger.info(f"{agent.name}::ERC-20 Token Balance for address {add}: {balance_in_tokens}")
+        logger.info(f"{agent.name}:: ERC-20 Token Balance for address {add}: {balance_in_tokens}")
         await asyncio.sleep(10)  # Add a 10-second delay before checking balance again
 
 def transfer_erc20_token(self):
@@ -39,7 +38,7 @@ def transfer_erc20_token(self):
                 txn, private_key=ETH_SETTINGS["PRIVATE_KEY"]
             )
             tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
-            logger.info(f"{self.name}::Transaction sent with hash: {tx_hash.hex()}")
+            logger.info(f"{self.name}:: Transaction sent with hash: {tx_hash.hex()}")
             return tx_hash.hex()
         else:
             logger.info("Insufficient tokens to transfer.")
