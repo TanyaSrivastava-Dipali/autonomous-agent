@@ -34,7 +34,7 @@ class TestAutonomousAgent(unittest.TestCase):
         self.inbox.join()
 
         # Assert that the logger.info was called correctly
-        mock_logger_info.assert_any_call("Filtered message (hello):")
+        mock_logger_info.assert_any_call("TestAgent:: Filtered message (hello):")
 
     @patch("src.handlers.logger.info")  # Mock the logger
     @patch("src.token_operation.transfer_erc20_token")  # Mock the transfer function
@@ -66,8 +66,8 @@ class TestAutonomousAgent(unittest.TestCase):
 
         # Verify logger calls
         mock_logger_info.assert_has_calls([
-            call("TestAgent::Initiating ERC-20 token transfer..."),
-            call(f"TestAgent::Transaction sent with hash: {mock_transaction_hash}"),
+            call("TestAgent:: Initiating ERC-20 token transfer..."),
+            call(f"TestAgent:: Transaction sent with hash: {mock_transaction_hash}"),
         ])
         
 class TestERC20BalanceBehaviour(IsolatedAsyncioTestCase):
@@ -109,7 +109,7 @@ class TestERC20BalanceBehaviour(IsolatedAsyncioTestCase):
 
             # Verify logger was called with the correct balance
             mock_logger_info.assert_called_once_with(
-                "TestAgent::ERC-20 Token Balance for address 0xMockedAddress: 1.0"
+                "TestAgent:: ERC-20 Token Balance for address 0xMockedAddress: 1.0"
             )
 
 # class TestERC20BalanceBehaviour(IsolatedAsyncioTestCase):
