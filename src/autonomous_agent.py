@@ -1,7 +1,6 @@
 import random
 import asyncio
 from web3 import Web3
-from functools import partial
 from .logger import logger
 from .utils.abi import ERC20_ABI
 from .config.settings import MESSAGE_WORDS, ETH_SETTINGS,WORDS_TO_FIND
