@@ -1,15 +1,17 @@
-import time
+import asyncio
+from .logger import logger
 
-def connect_agents(agent1, agent2):
-    while True:
-        # Relay message from agent1 to agent2
-        message = agent1.get_outbox_message()
-        if message:
-            agent2.send_inbox_message(message)
+async def connect_agents(agent1, agent2):
 
-        # Relay message from agent2 to agent1
-        message = agent2.get_outbox_message()
-        if message:
-            agent1.send_inbox_message(message)
+    async def relay_messages(from_agent, to_agent):
+        while True:
+            message = await from_agent.get_outbox_message()
+            if message:
+                await to_agent.send_inbox_message(message)
+            await asyncio.sleep(1)  # Prevent busy-waiting
 
-        time.sleep(1)
+    # Start two relay loops: one for each direction
+    await asyncio.gather(
+        relay_messages(agent1, agent2),
+        relay_messages(agent2, agent1)
+    )
