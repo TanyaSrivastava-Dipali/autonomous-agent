@@ -71,7 +71,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 - **`src/`**: Contains the source code for the autonomous agents and their functionalities.
   - **`config/`**: Holds the configuration files (such as `settings.py`) for environment-specific settings.
   - **`utils/`**: Contains ABI for smart contract.
-  - **`agent_connector.py`**: Manages the connection and communication logic with external agents or services.
+  - **`agent_connector.py`**: Manages the connection and communication logic with the external agents or services.
   - **`agent.py`**: Defines the primary structure autonomous agent, including its state.
   - **`autonomous_agent.py`**: Implements specific algorithms or strategies unique to the autonomous agent.
   - **`handlers.py`**: Contains handlers that process messages received by the agent, triggering specific behaviors.
