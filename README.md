@@ -10,6 +10,11 @@ This project involves building autonomous agents capable of message processing, 
 
 ## Installation & Running the Project
 
+### Prerequisites
+
+**Python 3.9+**
+
+
 Follow these steps to install the necessary dependencies for the project:
 
 1. Clone the repository:
@@ -18,10 +23,17 @@ Follow these steps to install the necessary dependencies for the project:
 git clone https://github.com/TanyaSrivastava-Dipali/autonomous-agent.git
 cd autonomous-agent
 ```
-2. Create Virtual Environment:
+2. Create Virtual Environment and Activate:
 
 ```bash
-python -m venv venv
+python3 -m venv venv
+```
+   - If `venv` is not installed, you can install it with and then create the venv with above command:
+     ```bash
+     sudo apt install python3-venv
+     ```
+ Activate the Virtual Environment
+```
 source venv/bin/activate
 ```
 
@@ -39,18 +51,18 @@ cp .env.example .env
 5. Add Your Keys to the .env File:
 
 
-  - Open the .env file and replace placeholder values with your actual keys, including RPC_NODE_URL, TOKEN_ADDRESS, FROM_ADDRESS, TO_ADDRESS, and PRIVATE_KEY.
+  - Open the .env file and replace placeholder values with your actual keys, including RPC_NODE_URL,TOKEN_ADDRESS, FROM_ADDRESS,TO_ADDRESS and PRIVATE_KEY.
 
 
 6. Run the agent:
 
 ```bash
-python -m src.main
+python3 -m src.main
 ```
 7. Run the Test:
 
 ```bash
-PYTHONPATH=src python -m unittest discover -s tests
+PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
 ## Description of Key Folders and Files:
